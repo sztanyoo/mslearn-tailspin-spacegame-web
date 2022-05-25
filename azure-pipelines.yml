@@ -67,7 +67,7 @@ steps:
 #   displayName: Tag Build
 
 - script: 'curl -X GET -u :$(admintoken) -H"Content-Type: application/json"
-          "https://vsaex.dev.azure.com/bencestan/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3" | jq'
+          "$(System.CollectionUri)/_apis/projects/$(System.TeamProjectId)/teams/TeamBudapest/members\?api-version\=6.0-preview.1 | jq'
   displayName: Get membership
 
 - script: 'while [ 0 != $(curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
