@@ -65,7 +65,7 @@ steps:
 # - script: 'curl -X PUT -H"Authorization: Bearer $(System.AccessToken)" -H "Content-Length: 0" "$(System.CollectionUri)$(System.TeamProjectId)/_apis/build/builds/$(Build.BuildId)/tags/service=${{ parameters.ServiceName }}?api-version=7.1-preview.3"'
 #   displayName: Tag Build
 
-- script: 'curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
+- script: 'curl -X GET -H"Authorization: Bearer $(System.AccessToken)" -H"Content-Type: application/json"
           "https://vsaex.dev.azure.com/bencestan/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3"'
   displayName: Get membership
 
