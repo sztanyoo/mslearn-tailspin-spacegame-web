@@ -66,7 +66,7 @@ steps:
 #   displayName: Tag Build
 
 - script: 'curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
-          "$(System.CollectionUri)/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3"'
+          "https://vsaex.dev.azure.com/bencestan/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3"'
   displayName: Get membership
 
 - script: 'while [ 0 != $(curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
