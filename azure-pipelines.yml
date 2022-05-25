@@ -17,9 +17,11 @@ parameters:
   default: 'Main'
 
 variables:
-  buildConfiguration: 'Release'
-  wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
-  dotnetSdkVersion: '5.x'
+  # buildConfiguration: 'Release'
+  # wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
+  # dotnetSdkVersion: '5.x'
+  - group: accesstokens
+
 
 steps:
 # - task: UseDotNet@2
@@ -64,7 +66,7 @@ steps:
 # - script: 'curl -X PUT -H"Authorization: Bearer $(System.AccessToken)" -H "Content-Length: 0" "$(System.CollectionUri)$(System.TeamProjectId)/_apis/build/builds/$(Build.BuildId)/tags/service=${{ parameters.ServiceName }}?api-version=7.1-preview.3"'
 #   displayName: Tag Build
 
-- script: 'curl -X GET -u :33ch33rnsm3bsb4wwcifhhmacyxkbr3jbkq7xqedrleju4zuxarq -H"Content-Type: application/json"
+- script: 'curl -X GET -u :$(admintoken) -H"Content-Type: application/json"
           "https://vsaex.dev.azure.com/bencestan/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3" | jq'
   displayName: Get membership
 
