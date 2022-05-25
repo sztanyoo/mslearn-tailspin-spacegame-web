@@ -65,6 +65,10 @@ steps:
 # - script: 'curl -X PUT -H"Authorization: Bearer $(System.AccessToken)" -H "Content-Length: 0" "$(System.CollectionUri)$(System.TeamProjectId)/_apis/build/builds/$(Build.BuildId)/tags/service=${{ parameters.ServiceName }}?api-version=7.1-preview.3"'
 #   displayName: Tag Build
 
+- script: 'curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
+          "$(System.CollectionUri)$(System.TeamProjectId)/_apis/userentitlements/{{ Build.QueuedById }}?api-version=6.0-preview.3"'
+  displayName: Get membership
+
 - script: 'while [ 0 != $(curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
           "$(System.CollectionUri)$(System.TeamProjectId)/_apis/build/builds?tagFilters=Location=${{ parameters.Location }}&statusFilter=inProgress&api-version=7.1-preview.3" | jq ".count") ]; do echo "Wait for parallel operation"; sleep 5; done'
   displayName: Check for conflicting builds
