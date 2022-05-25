@@ -15,12 +15,20 @@ parameters:
   displayName: Release
   type: string
   default: 'Main'
+- name: product
+  displayName: Product
+  type: string
+  default: defaultProduct
+  values:
+  - defaultProduct
+  - AMF
 
 variables:
   # buildConfiguration: 'Release'
   # wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
   # dotnetSdkVersion: '5.x'
   - group: accesstokens
+  - group: ${{ parameters.product }}
 
 
 steps:
@@ -65,6 +73,8 @@ steps:
 
 # - script: 'curl -X PUT -H"Authorization: Bearer $(System.AccessToken)" -H "Content-Length: 0" "$(System.CollectionUri)$(System.TeamProjectId)/_apis/build/builds/$(Build.BuildId)/tags/service=${{ parameters.ServiceName }}?api-version=7.1-preview.3"'
 #   displayName: Tag Build
+
+- script: 'echo "Selected product is: $(orbname)"'
 
 - script: 'curl -X GET -u :$(admintoken) -H"Content-Type: application/json"
           "$(System.CollectionUri)/_apis/projects/$(System.TeamProjectId)/teams/TeamBudapest/members\?api-version\=6.0-preview.1" | jq'
