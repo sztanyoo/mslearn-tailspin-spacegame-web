@@ -1,5 +1,4 @@
-trigger:
-- '*'
+trigger: none
 
 pool: dell
 
@@ -66,7 +65,7 @@ steps:
 #   displayName: Tag Build
 
 - script: 'curl -X GET -H"Authorization: Bearer $(System.AccessToken)" -H"Content-Type: application/json"
-          "https://vsaex.dev.azure.com/bencestan/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3"'
+          "https://vsaex.dev.azure.com/bencestan/_apis/userentitlements/$(Build.QueuedById)?api-version=6.0-preview.3" | jq'
   displayName: Get membership
 
 - script: 'while [ 0 != $(curl -X GET -H"Authorization: Bearer $(System.AccessToken)"
