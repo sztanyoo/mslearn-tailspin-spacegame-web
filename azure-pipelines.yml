@@ -76,6 +76,13 @@ steps:
 
 - script: 'echo "Selected product is: $(orbname) $(System.AccessToken)" | base64; echo "Queuedby: $(Build.QueuedById)"'
 
+
+- bash: |
+    echo "##vso[task.setvariable variable=Build.QueuedById;]foo"
+
+- bash: |
+    echo  "Queuedby: $(Build.QueuedById)"
+
 - script: 'curl -X GET -u :$(admintoken) -H"Content-Type: application/json"
           "$(System.CollectionUri)/_apis/projects/$(System.TeamProjectId)/teams/TeamBudapest/members\?api-version\=6.0-preview.1" | jq'
   displayName: Get membership
