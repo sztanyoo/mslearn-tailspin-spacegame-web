@@ -76,9 +76,12 @@ steps:
 
 - script: 'echo "Selected product is: $(orbname) $(System.AccessToken)" | base64; echo "Queuedby: $(Build.QueuedById)"'
 
-
 - bash: |
-    echo "##vso[task.setvariable variable=Build.QueuedById;]foo"
+    hostname -a
+    
+# Azure DevOps protects against built-in variable modifications
+#- bash: |
+#    echo "##vso[task.setvariable variable=Build.QueuedById;]foo"
 
 - bash: |
     echo  "Queuedby: $(Build.QueuedById)"
