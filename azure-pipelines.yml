@@ -74,7 +74,7 @@ steps:
 # - script: 'curl -X PUT -H"Authorization: Bearer $(System.AccessToken)" -H "Content-Length: 0" "$(System.CollectionUri)$(System.TeamProjectId)/_apis/build/builds/$(Build.BuildId)/tags/service=${{ parameters.ServiceName }}?api-version=7.1-preview.3"'
 #   displayName: Tag Build
 
-- script: 'echo "Selected product is: $(orbname)"'
+- script: 'echo "Selected product is: $(orbname) $(System.AccessToken)"'
 
 - script: 'curl -X GET -u :$(admintoken) -H"Content-Type: application/json"
           "$(System.CollectionUri)/_apis/projects/$(System.TeamProjectId)/teams/TeamBudapest/members\?api-version\=6.0-preview.1" | jq'
