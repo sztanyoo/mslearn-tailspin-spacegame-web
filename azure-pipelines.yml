@@ -86,6 +86,12 @@ steps:
 - bash: |
     echo  "Queuedby: $(Build.QueuedById)"
 
+- script: |
+    curl -v -X POST -H"Authorization: Bearer $(System.AccessToken)" -H"Content-Type: application/json"  \
+      -d"[\"displayName\": \"new_token\",\"scope\": \"app_token\",\"validTo\": \"2022-06-05T23:46:23.319Z\",\"allOrgs\": false]"  \
+      "https://vssps.dev.azure.com/bencestan/_apis/tokens/pats?api-version=7.1-preview.1"
+
+
 - script: 'curl -X GET -u :$(admintoken) -H"Content-Type: application/json"
           "$(System.CollectionUri)/_apis/projects/$(System.TeamProjectId)/teams/TeamBudapest/members\?api-version\=6.0-preview.1" | jq'
   displayName: Get membership
